@@ -68,9 +68,12 @@ gulp.task('clean:dist', function() {
 
 gulp.task('watch', ['browserSync'], function (){
   gulp.watch('app/sass/**/*.sass', ['sass']);  //watch sass changes
-  gulp.watch('app/**/*.html', ['html']);  //watch html changes
+  gulp.watch('app/sass/**/*.sass').on('change', browserSync.reload);
+  gulp.watch('app/*.html').on('change', browserSync.reload);
+    //watch html changes
+    gulp.watch('app/js/*.js').on('change', browserSync.reload);
   gulp.watch('app/image/**/*', ['images']); //watch image changes
-  gulp.watch('app/**/*.js', ['js']);  //watch js changes
+  //gulp.watch('app/**/*.js', ['js-min']);  //watch js changes
 })
 
 gulp.task('build', function (callback) {

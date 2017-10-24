@@ -9,17 +9,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " TREE TAB
-Plugin ('scrooloose/nerdtree')
-Plugin ('jistr/vim-nerdtree-tabs.git')
+Plugin 'scrooloose/nerdtree'
+" Plugin 'jistr/vim-nerdtree-tabs.git'
 
 " Smart comments
-Plugin ('tpope/vim-commentary')
+Plugin 'tpope/vim-commentary'
 
 "Git
-Plugin ('tpope/vim-fugitive')
+Plugin 'tpope/vim-fugitive'
 
-"Fuzzy file, buffer, mru, tag, etc finder. 
-Plugin ('ctrlpvim/ctrlp.vim')
+"Fuzzy file, buffer, mru, tag, etc finder.
+Plugin 'ctrlpvim/ctrlp.vim'
 
 "Visual tab {bottom}
 Plugin 'vim-airline/vim-airline'
@@ -27,7 +27,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 "Packages themes
 Plugin 'flazz/vim-colorschemes'
-Plugin 'chriskempson/base16-vim'
+" Plugin 'chriskempson/base16-vim'
 
 "Shows a git diff in the gutter (sign column) and stages/undoes hunks.
 Plugin 'airblade/vim-gitgutter'
@@ -36,7 +36,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'sheerun/vim-polyglot'
 
 "Make gvim-only colorschemes work transparently in terminal vim
-Plugin 'vim-scripts/CSApprox'
+" Plugin 'vim-scripts/CSApprox'
 
 "This plugin causes all trailing whitespace to be highlighted in red.
 Plugin 'bronson/vim-trailing-whitespace'
@@ -45,13 +45,13 @@ Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'jiangmiao/auto-pairs'
 
 "Tagbar displays the tags of the current file in a sidebar,
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 
 "Syntax checking hacks for vim
 Plugin 'scrooloose/syntastic'
 
 "Multiple Cursors
-Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'terryma/vim-multiple-cursors'
 
 "Display the indention levels with thin vertical lines
 Plugin 'Yggdroot/indentLine'
@@ -63,7 +63,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 
-"Improved integration between Vim and its environment 
+"Improved integration between Vim and its environment
 Plugin 'Shougo/vimshell.vim'
 
 "" Snippets
@@ -71,10 +71,9 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 "" Custom bundles
-Plugin 'tpope/vim-surround'
+Plugin 'ajh17/vimcompletesme'
 Plugin 'mattn/emmet-vim'
 Plugin 'michalliu/sourcebeautify.vim'
-Plugin 'ervandew/supertab'
 
 "" Javascript Bundle
 Plugin 'jelera/vim-javascript-syntax'
@@ -90,9 +89,15 @@ Plugin 'groenewege/vim-less'
 Plugin 'gorodinskiy/vim-coloresque'
 
 "" HTML Bundle
+" Plugin 'vim-scripts/HTML-AutoCloseTag'
 Plugin 'alvan/vim-closetag'
 Plugin 'tpope/vim-haml'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'mustache/vim-mustache-handlebars'
+
+"" Surroundings Plugin
+Plugin 'tpope/vim-surround'
+Plugin 'townk/vim-autoclose'
 
 call vundle#end()
 
@@ -107,14 +112,15 @@ au FileType sass setl ofu=csscomplete#CompleteCSS
 au FileType scss setl ofu=csscomplete#CompleteCSS
 au FileType less setl ofu=csscomplete#CompleteCSS
 
-set completeopt=longest,menuone
-let g:SuperTabCrMapping = 0
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>'
-autocmd FileType *
-    \ if &omnifunc != '' |
-    \     call SuperTabChain(&omnifunc, '<c-p>') |
-    \ endif
+"SuperTab config
+"set completeopt=longest,menuone
+"let g:SuperTabCrMapping = 0
+"let g:SuperTabDefaultCompletionType = 'context'
+"let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>'
+"autocmd FileType *
+"    \ if &omnifunc != '' |
+"    \     call SuperTabChain(&omnifunc, '<c-p>') |
+"    \ endif
 
 "*****************************************************************************
 "" Basic Setup
@@ -128,12 +134,11 @@ set fileencodings=utf-8
 set backspace=indent,eol,start
 
 "" Tabs. May be overriten by autocmd rules
-set tabstop=3
-set softtabstop=0
-set shiftwidth=4
 set expandtab
+set tabstop=4
+set shiftwidth=4
 
-"" Map leader to space
+"" Map leader to comma
 let mapleader=','
 
 "" Enable hidden buffers
@@ -174,14 +179,14 @@ set number
 let no_buffers_menu=1
 " set background=dark
 syntax on
-colorscheme molokai 
-set lines=60 columns=200
+colorscheme molokai
+"set lines=60 columns=100
 
 set mouse=a
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
-set gfn=Monospace\ 10
+set guifont=Bitstream\ Vera\ Sans\ Mono:h16
 
 if has("gui_running")
   if has("gui_mac") || has("gui_macvim")
@@ -312,6 +317,9 @@ augroup vimrc-make-cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
+" autocmd FileType sass,scss,less,html let b:vcm_tab_complete = 'dict'
+autocmd FileType html,css,sass,less,php,ruby let b:vcm_tab_complete = "omni"
+
 set autoread
 
 "*****************************************************************************
@@ -320,15 +328,28 @@ set autoread
 
 "" Tabs
 " nnoremap <Tab> gt
-nnoremap <S-Tab> gT
+" nnoremap <S-Tab> gT
 nnoremap <silent> <S-n> :tabnew<CR>
 noremap <Leader>t :tabnew <C-R>=expand("%:p:h") . "/" <CR>
+
+" enter for select autocomplete words
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+let g:UltiSnipsExpandTrigger="<C-q>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+
+" let g:UltiSnipsSnippetDirectories=["custom_snippets"]
+" let g:UltiSnipsSnippetsDir="~/.vim/snippets_custom/""
+
+" Mustache
+let g:mustache_abbreviations = 1
 
 "" Git
 noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>ga :Gwrite<CR>
 noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
+noremap <Leader>gpu :Gpush<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gr :Gremove<CR>
 noremap <Leader>gll :Gpull<CR>
@@ -393,6 +414,13 @@ let g:indentLine_color_term = 239
 let g:indentLine_char = '┆'
 let g:indentLine_faster = 1
 
+" closetag
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
+
 " Disable visualbell
 set visualbell t_vb=
 
@@ -452,9 +480,9 @@ augroup vimrc-javascript
 augroup END
 
 
-"*****************************************************************************
+"*********************************************************************
 "" Airline
-"*****************************************************************************
+"*********************************************************************
 let g:airline_theme = 'bubblegum'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
@@ -463,3 +491,15 @@ let g:airline#extensions#tagbar#enabled = 1
 
 set laststatus=2
 set ttimeoutlen=50
+
+" ====== Make tabs be addressable via Apple+1 or 2 or 3, etc
+" Use numbers to pick the tab you want (like iTerm)
+" map <silent> <D-1> :tabn 1<cr>
+" map <silent> <D-2> :tabn 2<cr>
+" map <silent> <D-3> :tabn 3<cr>
+" map <silent> <D-4> :tabn 4<cr>
+" map <silent> <D-5> :tabn 5<cr>
+" map <silent> <D-6> :tabn 6<cr>
+" map <silent> <D-7> :tabn 7<cr>
+" map <silent> <D-8> :tabn 8<cr>
+" cmap <silent> <D-9> :tabn 9<cr>
