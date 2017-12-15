@@ -77,8 +77,6 @@ Plugin 'michalliu/sourcebeautify.vim'
 
 "" Javascript Bundle
 Plugin 'jelera/vim-javascript-syntax'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'burnettk/vim-angular'
 Plugin 'mxw/vim-jsx'
 Plugin 'leafgarland/typescript-vim'
 
@@ -97,7 +95,8 @@ Plugin 'mustache/vim-mustache-handlebars'
 
 "" Surroundings Plugin
 Plugin 'tpope/vim-surround'
-Plugin 'townk/vim-autoclose'
+" Plugin 'townk/vim-autoclose'
+" Plugin 'osyo-manga/vim-over'
 
 call vundle#end()
 
