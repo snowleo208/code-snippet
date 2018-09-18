@@ -1,15 +1,17 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        client: ['./src/index.js'],
+        client: ['./scripts/form-config.js', './src/index.js']
     },
     output: {
-        filename: '[name].js',
+        filename: '[name].[contenthash:5].js',
         path: path.resolve('dist'),
-        chunkFilename: '[name].js',
-        publicPath: '/',
+        chunkFilename: '[name].[contenthash:5].js',
+        publicPath: './dist',
     },
     optimization: {
         splitChunks: {
@@ -45,7 +47,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(html|png|jpg)$/,
+                test: /\.(png|jpg)$/,
                 loader: "file-loader",
                 options: {
                     name: '[name].[ext]',
@@ -71,5 +73,15 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({ publicPath: './', filename: 'style.min.css' }),
+        new HtmlWebpackPlugin({
+            filename: path.resolve(__dirname, './index.html'),
+            template: './src/index.html',
+        }),
+        new CleanWebpackPlugin(['dist', 'build'], {
+            verbose: true, 
+            dry: false,
+            // exclude: ['shared.js']
+        })
+        
     ]
 };
