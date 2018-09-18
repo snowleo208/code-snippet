@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        client: ['./scripts/form-config.js', './src/index.js']
+        client: ['./src/index.js']
     },
     output: {
         filename: '[name].[contenthash:5].js',
