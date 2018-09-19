@@ -5,7 +5,7 @@ const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 
 module.exports = {
   entry: {
-    client: ["./scripts/form-config.js", "./src/index.js"]
+    client: ["./src/index.js"]
   },
   output: {
     filename: "[name].[hash:5].js",
