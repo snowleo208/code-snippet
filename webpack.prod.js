@@ -9,6 +9,10 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
+  output: {
+    filename: "[name].[contenthash:5].js",
+    chunkFilename: "[name].[contenthash:5].js",
+  },
   optimization: {
     minimizer: [
         new UglifyJsPlugin({

@@ -70,7 +70,7 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       publicPath: "./",
-      filename: "style.min.css"
+      filename: "style.[contenthash:5].css"
     }),
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,

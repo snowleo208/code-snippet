@@ -4,12 +4,17 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   mode: 'development',
-  // devtool: 'inline-source-map',
+  devtool: 'inline-source-map',
+  output: {
+    filename: "[name].[hash:5].js",
+    chunkFilename: "[name].[contenthash:5].js",
+  },
   devServer: {
     contentBase: path.join(__dirname, "/"),
     port: 8080,
     publicPath: "http://localhost:8080/dist/",
     https: false,
+    hotOnly: true,
     headers: { "Access-Control-Allow-Origin": "*" },
     open: "http://localhost:8080"
   },
