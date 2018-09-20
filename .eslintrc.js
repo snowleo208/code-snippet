@@ -22,9 +22,9 @@ module.exports = {
         "react",
         "jsx-a11y"
     ],
-    "globals": {
-        "EF": true
-    },
+    // "globals": {
+    //     "$": true
+    // },
     "rules": {
         "indent": [
             "warn",
