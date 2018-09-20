@@ -10,7 +10,7 @@ module.exports = {
         "allowImportExportEverywhere": false,
         "codeFrame": true
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsx-a11y/recommended"],
     "parserOptions": {
         "sourceType": "module",
         "ecmaFeatures": {
@@ -19,11 +19,12 @@ module.exports = {
         "ecmaVersion": 2018
     },
     "plugins": [
-        "react"
+        "react",
+        "jsx-a11y"
     ],
-    // "globals": {
-    //     "$": true
-    // },
+    "globals": {
+        "EF": true
+    },
     "rules": {
         "indent": [
             "warn",
@@ -40,6 +41,6 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
     }
 };
