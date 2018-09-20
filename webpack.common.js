@@ -9,9 +9,9 @@ module.exports = {
   },
   output: {
     filename: "[name].[hash:5].js",
-    path: path.join(__dirname, "/dist"),
+    path: path.join(__dirname, "/dist/"),
     chunkFilename: "[name].[contenthash:5].js",
-    publicPath: "./dist",
+    publicPath: "./dist/",
   },
   optimization: {
     splitChunks: {

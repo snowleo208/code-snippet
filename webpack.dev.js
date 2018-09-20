@@ -13,11 +13,11 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, "/"),
     port: 8080,
-    publicPath: "http://localhost:8080/dist/",
+    publicPath: "/dist/",
     https: false,
     hotOnly: true,
     headers: { "Access-Control-Allow-Origin": "*" },
-    open: "http://localhost:8080"
+    open: "http://localhost:8080/"
   },
   module: {
     rules: [
