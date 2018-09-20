@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     filename: "[name].[hash:5].js",
-    path: path.join(__dirname, "/dist/"),
+    path: path.join(__dirname, "/dist"),
     chunkFilename: "[name].[contenthash:5].js",
     publicPath: "./dist/",
   },
@@ -52,26 +52,12 @@ module.exports = {
           publicPath: "./dist/"
         }
       },
-      {
-        test: /\.(css|scss)$/,
-        use: [
-          "style-loader",
-          MiniCssExtractPlugin.loader,
-          "css-loader?url=false",
-          "postcss-loader",
-          "sass-loader"
-        ]
-      }
     ]
   },
   resolve: {
     extensions: [".js", ".jsx"]
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      publicPath: "./",
-      filename: "style.[contenthash:5].css"
-    }),
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
       template: "./src/index.html",

@@ -32,6 +32,15 @@ module.exports = merge(common, {
           }
         }
       },
+      {
+        test: /\.(css|scss)$/,
+        use: [
+          "style-loader",
+          "css-loader?url=false",
+          "postcss-loader",
+          "sass-loader"
+        ]
+      }
     ]
   },
   plugins: [
